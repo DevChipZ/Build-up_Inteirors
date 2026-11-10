@@ -1,0 +1,702 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Buildup Interior | Nagercoil</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
+    
+    <!-- Feather Icons (Vanilla JS equivalent to Lucide) -->
+    <script src="https://unpkg.com/feather-icons"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['Inter', 'sans-serif'] },
+                    colors: { emerald: { 400: '#34d399', 500: '#10b981', 600: '#059669', 700: '#047857' } }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Custom Styles */
+        body {
+            font-family: 'Inter', sans-serif;
+            -webkit-font-smoothing: antialiased;
+        }
+        .hide-scrollbar::-webkit-scrollbar { display: none; }
+        .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        
+        /* Page Fade In Animation */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .page-section {
+            animation: fadeIn 0.7s ease-out forwards;
+            display: none; /* Hidden by default, toggled via JS */
+        }
+        .page-active {
+            display: block;
+        }
+        
+        /* Transition Overlay Worker Setup */
+        .worker {
+            position: absolute;
+            font-size: 2.5rem;
+            left: -10vw;
+            opacity: 0;
+            transform: translateX(0);
+        }
+    </style>
+</head>
+<body class="bg-white text-zinc-900 font-sans selection:bg-emerald-600 selection:text-white overflow-x-hidden min-h-screen flex flex-col">
+
+    <!-- Navigation -->
+    <nav class="fixed top-0 left-0 right-0 z-40 bg-white/90 backdrop-blur-md border-b border-zinc-200">
+        <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+            
+            <!-- Logo -->
+            <div class="flex items-center gap-3 cursor-pointer group" onclick="navigate('home')">
+                <div class="relative w-12 h-12 flex items-center justify-center bg-zinc-900 rounded-xl overflow-hidden group-hover:bg-emerald-600 transition-colors">
+                    <div class="absolute inset-0 flex flex-col items-center justify-center">
+                        <div class="w-0 h-0 border-l-[12px] border-r-[12px] border-b-[12px] border-transparent border-b-emerald-500 mb-1"></div>
+                        <span class="text-white font-black text-xs tracking-widest">UP</span>
+                    </div>
+                </div>
+                <div class="flex flex-col">
+                    <span class="text-xl font-black tracking-tight leading-none text-zinc-900 uppercase">Buildup</span>
+                    <span class="text-xs font-semibold tracking-[0.2em] text-emerald-600 uppercase">Interior</span>
+                </div>
+            </div>
+
+            <!-- Desktop Nav -->
+            <div class="hidden md:flex gap-8 items-center">
+                <button onclick="navigate('home')" class="nav-link text-sm font-bold uppercase tracking-wider transition-colors hover:text-emerald-600 text-emerald-600" data-target="home">Home</button>
+                <button onclick="navigate('services')" class="nav-link text-sm font-bold uppercase tracking-wider transition-colors hover:text-emerald-600 text-zinc-500" data-target="services">Services</button>
+                <button onclick="navigate('portfolio')" class="nav-link text-sm font-bold uppercase tracking-wider transition-colors hover:text-emerald-600 text-zinc-500" data-target="portfolio">Portfolio</button>
+                <button onclick="navigate('about')" class="nav-link text-sm font-bold uppercase tracking-wider transition-colors hover:text-emerald-600 text-zinc-500" data-target="about">About</button>
+                <button onclick="navigate('quote')" class="bg-zinc-900 hover:bg-emerald-600 text-white px-6 py-2.5 rounded-none font-bold uppercase tracking-wider text-sm transition-all">Get a Quote</button>
+            </div>
+
+            <!-- Mobile Menu Toggle -->
+            <button class="md:hidden p-2 text-zinc-900" id="mobile-menu-btn">
+                <i data-feather="menu"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Mobile Navigation Dropdown -->
+    <div id="mobile-menu" class="fixed inset-0 z-30 bg-white pt-24 px-6 md:hidden hidden">
+        <div class="flex flex-col gap-6">
+            <button onclick="navigate('home')" class="text-2xl font-black uppercase tracking-wider text-left text-zinc-900">Home</button>
+            <button onclick="navigate('services')" class="text-2xl font-black uppercase tracking-wider text-left text-zinc-900">Services</button>
+            <button onclick="navigate('portfolio')" class="text-2xl font-black uppercase tracking-wider text-left text-zinc-900">Portfolio</button>
+            <button onclick="navigate('about')" class="text-2xl font-black uppercase tracking-wider text-left text-zinc-900">About</button>
+            <button onclick="navigate('quote')" class="bg-emerald-600 text-white px-6 py-4 rounded-none font-black uppercase tracking-wider text-xl mt-4 w-full text-left">Get a Quote</button>
+        </div>
+    </div>
+
+    <!-- Main Content Area -->
+    <main class="pt-20 flex-grow">
+        
+        <!-- HOME PAGE -->
+        <div id="home-page" class="page-section page-active">
+            <section class="relative min-h-[85vh] flex items-center overflow-hidden bg-zinc-900">
+                <div class="absolute inset-0 z-0">
+                    <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1920&q=80" alt="Modern Interior" class="w-full h-full object-cover opacity-40 mix-blend-overlay">
+                    <div class="absolute inset-0 bg-gradient-to-r from-zinc-900 via-zinc-900/80 to-transparent"></div>
+                </div>
+                <div class="max-w-7xl mx-auto px-6 relative z-10 w-full pt-20">
+                    <div class="max-w-3xl">
+                        <div class="inline-flex items-center gap-2 px-4 py-2 bg-emerald-600/20 border border-emerald-500/30 text-emerald-400 text-sm font-bold tracking-wider uppercase mb-6">
+                            <i data-feather="map-pin" class="w-4 h-4"></i> Nagercoil's Premier Studio
+                        </div>
+                        <h1 class="text-5xl md:text-7xl font-black tracking-tighter leading-[1.1] text-white mb-6 uppercase">
+                            Transforming <br/>
+                            <span class="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-emerald-600">Spaces & Lives.</span>
+                        </h1>
+                        <p class="text-xl text-zinc-300 mb-10 max-w-xl leading-relaxed">Expert interior design and civil work. From bespoke modular kitchens to complete turnkey projects, we build your vision.</p>
+                        <div class="flex flex-col sm:flex-row gap-4">
+                            <button onclick="navigate('quote')" class="group bg-emerald-600 hover:bg-emerald-500 text-white px-8 py-4 font-black uppercase tracking-wider text-sm flex items-center justify-center gap-3 transition-all">
+                                Start Your Project <i data-feather="arrow-right" class="w-5 h-5 group-hover:translate-x-1 transition-transform"></i>
+                            </button>
+                            <button onclick="navigate('portfolio')" class="group bg-white/10 hover:bg-white/20 text-white backdrop-blur-sm border border-white/20 px-8 py-4 font-black uppercase tracking-wider text-sm flex items-center justify-center transition-all">
+                                View Our Work
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="py-24 bg-white">
+                <div class="max-w-7xl mx-auto px-6">
+                    <div class="flex flex-col md:flex-row justify-between items-end mb-16 gap-6">
+                        <div>
+                            <h2 class="text-4xl font-black uppercase tracking-tighter mb-4">Our Core Services</h2>
+                            <p class="text-zinc-500 max-w-md">Comprehensive interior and civil solutions tailored for residential and commercial spaces.</p>
+                        </div>
+                        <button onclick="navigate('services')" class="text-emerald-600 font-bold uppercase tracking-wider text-sm flex items-center gap-2 hover:gap-3 transition-all">
+                            All Services <i data-feather="arrow-right" class="w-4 h-4"></i>
+                        </button>
+                    </div>
+                    <div class="grid md:grid-cols-4 gap-8">
+                        <!-- Service 1 -->
+                        <div class="group cursor-pointer" onclick="navigate('services')">
+                            <div class="aspect-square bg-zinc-100 mb-6 overflow-hidden relative">
+                                <div class="absolute inset-0 bg-emerald-600/0 group-hover:bg-emerald-600/20 transition-colors z-10"></div>
+                                <img src="https://images.unsplash.com/photo-1556910103-1c02745a828?auto=format&fit=crop&w=600&q=80" alt="Modular Kitchen" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                            </div>
+                            <h3 class="text-xl font-bold uppercase tracking-tight group-hover:text-emerald-600 transition-colors">Modular Kitchen</h3>
+                            <div class="w-12 h-1 bg-emerald-600 mt-4 group-hover:w-full transition-all duration-300"></div>
+                        </div>
+                        <!-- Service 2 -->
+                        <div class="group cursor-pointer" onclick="navigate('services')">
+                            <div class="aspect-square bg-zinc-100 mb-6 overflow-hidden relative">
+                                <div class="absolute inset-0 bg-emerald-600/0 group-hover:bg-emerald-600/20 transition-colors z-10"></div>
+                                <img src="https://images.unsplash.com/photo-1595515106969-1ce29566ff1c?auto=format&fit=crop&w=600&q=80" alt="Custom Wardrobes" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                            </div>
+                            <h3 class="text-xl font-bold uppercase tracking-tight group-hover:text-emerald-600 transition-colors">Custom Wardrobes</h3>
+                            <div class="w-12 h-1 bg-emerald-600 mt-4 group-hover:w-full transition-all duration-300"></div>
+                        </div>
+                        <!-- Service 3 -->
+                        <div class="group cursor-pointer" onclick="navigate('services')">
+                            <div class="aspect-square bg-zinc-100 mb-6 overflow-hidden relative">
+                                <div class="absolute inset-0 bg-emerald-600/0 group-hover:bg-emerald-600/20 transition-colors z-10"></div>
+                                <img src="https://images.unsplash.com/photo-1505691938895-1758d7bef511?auto=format&fit=crop&w=600&q=80" alt="False Ceiling" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                            </div>
+                            <h3 class="text-xl font-bold uppercase tracking-tight group-hover:text-emerald-600 transition-colors">False Ceiling</h3>
+                            <div class="w-12 h-1 bg-emerald-600 mt-4 group-hover:w-full transition-all duration-300"></div>
+                        </div>
+                        <!-- Service 4 -->
+                        <div class="group cursor-pointer" onclick="navigate('services')">
+                            <div class="aspect-square bg-zinc-100 mb-6 overflow-hidden relative">
+                                <div class="absolute inset-0 bg-emerald-600/0 group-hover:bg-emerald-600/20 transition-colors z-10"></div>
+                                <img src="https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&w=600&q=80" alt="Turnkey Projects" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                            </div>
+                            <h3 class="text-xl font-bold uppercase tracking-tight group-hover:text-emerald-600 transition-colors">Turnkey Projects</h3>
+                            <div class="w-12 h-1 bg-emerald-600 mt-4 group-hover:w-full transition-all duration-300"></div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- SERVICES PAGE -->
+        <div id="services-page" class="page-section py-20">
+            <div class="max-w-7xl mx-auto px-6 mb-16">
+                <h1 class="text-5xl font-black uppercase tracking-tighter mb-4">Our Services</h1>
+                <p class="text-xl text-zinc-500 max-w-2xl">From initial conceptualization to the final coat of paint, we provide comprehensive design and build solutions.</p>
+            </div>
+            <div class="max-w-7xl mx-auto px-6 space-y-24">
+                
+                <div class="flex flex-col md:flex-row gap-12 items-center">
+                    <div class="w-full md:w-1/2 aspect-[4/3] bg-zinc-100 overflow-hidden relative group">
+                        <img src="https://images.unsplash.com/photo-1556910103-1c02745a828?auto=format&fit=crop&w=1200&q=80" alt="Modular Kitchen" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
+                    </div>
+                    <div class="w-full md:w-1/2 space-y-6">
+                        <div class="inline-block px-3 py-1 bg-emerald-100 text-emerald-700 text-xs font-bold uppercase tracking-widest">01</div>
+                        <h2 class="text-3xl font-black uppercase tracking-tight">Modular Kitchen</h2>
+                        <p class="text-zinc-600 text-lg leading-relaxed">Ergonomic, modern, and highly functional kitchen designs customized to fit your cooking style and space perfectly. Utilizing premium materials for durability.</p>
+                        <ul class="space-y-2 pt-4">
+                            <li class="flex items-center gap-3 text-sm font-semibold uppercase tracking-wider text-zinc-900"><i data-feather="check" class="w-5 h-5 text-emerald-600"></i> Premium Materials</li>
+                            <li class="flex items-center gap-3 text-sm font-semibold uppercase tracking-wider text-zinc-900"><i data-feather="check" class="w-5 h-5 text-emerald-600"></i> On-time Delivery</li>
+                            <li class="flex items-center gap-3 text-sm font-semibold uppercase tracking-wider text-zinc-900"><i data-feather="check" class="w-5 h-5 text-emerald-600"></i> Expert Craftsmanship</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="flex flex-col md:flex-row-reverse gap-12 items-center">
+                    <div class="w-full md:w-1/2 aspect-[4/3] bg-zinc-100 overflow-hidden relative group">
+                        <img src="https://images.unsplash.com/photo-1595515106969-1ce29566ff1c?auto=format&fit=crop&w=1200&q=80" alt="Wardrobes" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
+                    </div>
+                    <div class="w-full md:w-1/2 space-y-6">
+                        <div class="inline-block px-3 py-1 bg-emerald-100 text-emerald-700 text-xs font-bold uppercase tracking-widest">02</div>
+                        <h2 class="text-3xl font-black uppercase tracking-tight">Wardrobes</h2>
+                        <p class="text-zinc-600 text-lg leading-relaxed">Sleek, space-saving, and elegant wardrobe solutions. From walk-ins to sliding doors, we maximize storage without compromising on bedroom aesthetics.</p>
+                        <ul class="space-y-2 pt-4">
+                            <li class="flex items-center gap-3 text-sm font-semibold uppercase tracking-wider text-zinc-900"><i data-feather="check" class="w-5 h-5 text-emerald-600"></i> Premium Materials</li>
+                            <li class="flex items-center gap-3 text-sm font-semibold uppercase tracking-wider text-zinc-900"><i data-feather="check" class="w-5 h-5 text-emerald-600"></i> On-time Delivery</li>
+                            <li class="flex items-center gap-3 text-sm font-semibold uppercase tracking-wider text-zinc-900"><i data-feather="check" class="w-5 h-5 text-emerald-600"></i> Expert Craftsmanship</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="flex flex-col md:flex-row gap-12 items-center">
+                    <div class="w-full md:w-1/2 aspect-[4/3] bg-zinc-100 overflow-hidden relative group">
+                        <img src="https://images.unsplash.com/photo-1505691938895-1758d7bef511?auto=format&fit=crop&w=1200&q=80" alt="False Ceiling" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
+                    </div>
+                    <div class="w-full md:w-1/2 space-y-6">
+                        <div class="inline-block px-3 py-1 bg-emerald-100 text-emerald-700 text-xs font-bold uppercase tracking-widest">03</div>
+                        <h2 class="text-3xl font-black uppercase tracking-tight">False Ceiling</h2>
+                        <p class="text-zinc-600 text-lg leading-relaxed">Innovative false ceiling designs featuring modern geometric patterns, ambient cove lighting, and acoustic benefits to elevate any room's atmosphere.</p>
+                        <ul class="space-y-2 pt-4">
+                            <li class="flex items-center gap-3 text-sm font-semibold uppercase tracking-wider text-zinc-900"><i data-feather="check" class="w-5 h-5 text-emerald-600"></i> Premium Materials</li>
+                            <li class="flex items-center gap-3 text-sm font-semibold uppercase tracking-wider text-zinc-900"><i data-feather="check" class="w-5 h-5 text-emerald-600"></i> On-time Delivery</li>
+                            <li class="flex items-center gap-3 text-sm font-semibold uppercase tracking-wider text-zinc-900"><i data-feather="check" class="w-5 h-5 text-emerald-600"></i> Expert Craftsmanship</li>
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- PORTFOLIO PAGE -->
+        <div id="portfolio-page" class="page-section py-20 bg-zinc-50 min-h-screen">
+            <div class="max-w-7xl mx-auto px-6 mb-12 text-center">
+                <h1 class="text-5xl font-black uppercase tracking-tighter mb-4">Our Work</h1>
+                <p class="text-xl text-zinc-500 max-w-2xl mx-auto">Explore a selection of our recently completed residential and commercial projects across Nagercoil.</p>
+            </div>
+            <div class="max-w-7xl mx-auto px-6">
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    
+                    <div class="break-inside-avoid relative group overflow-hidden bg-zinc-200 aspect-square">
+                        <img src="/Build-up_Inteirors/assets/images/ceiling-1.webp" onerror="this.src='https://placehold.co/600x600/e4e4e7/52525b?text=Geometric+LED+Ceiling'" alt="Geometric LED Ceiling" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 bg-zinc-300">
+                        <div class="absolute inset-0 bg-zinc-900/80 opacity-0 group-hover:opacity-100 transition-opacity flex flex-col items-center justify-center p-6 text-center">
+                            <span class="text-emerald-500 font-bold uppercase tracking-widest text-xs mb-2">False Ceiling</span>
+                            <h3 class="text-white font-black text-xl mb-4">Geometric LED Ceiling</h3>
+                        </div>
+                    </div>
+
+                    <div class="break-inside-avoid relative group overflow-hidden bg-zinc-200 aspect-square">
+                        <img src="/Build-up_Inteirors/assets/images/partition-1.webp" onerror="this.src='https://placehold.co/600x600/e4e4e7/52525b?text=Illuminated+Room+Divider'" alt="Illuminated Room Divider" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 bg-zinc-300">
+                        <div class="absolute inset-0 bg-zinc-900/80 opacity-0 group-hover:opacity-100 transition-opacity flex flex-col items-center justify-center p-6 text-center">
+                            <span class="text-emerald-500 font-bold uppercase tracking-widest text-xs mb-2">Partitions</span>
+                            <h3 class="text-white font-black text-xl mb-4">Illuminated Room Divider</h3>
+                        </div>
+                    </div>
+
+                    <div class="break-inside-avoid relative group overflow-hidden bg-zinc-200 aspect-square">
+                        <img src="/Build-up_Inteirors/assets/images/wardrobe-1.webp" onerror="this.src='https://placehold.co/600x600/e4e4e7/52525b?text=Tri-Color+Modular+Wardrobe'" alt="Tri-Color Modular Wardrobe" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 bg-zinc-300">
+                        <div class="absolute inset-0 bg-zinc-900/80 opacity-0 group-hover:opacity-100 transition-opacity flex flex-col items-center justify-center p-6 text-center">
+                            <span class="text-emerald-500 font-bold uppercase tracking-widest text-xs mb-2">Wardrobes</span>
+                            <h3 class="text-white font-black text-xl mb-4">Tri-Color Modular Wardrobe</h3>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <!-- ABOUT PAGE -->
+        <div id="about-page" class="page-section py-20">
+            <div class="max-w-7xl mx-auto px-6">
+                <div class="grid lg:grid-cols-2 gap-16 items-center">
+                    <div class="relative">
+                        <div class="absolute inset-0 bg-emerald-600 translate-x-4 translate-y-4"></div>
+                        <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=1200&q=80" alt="Design Studio" class="relative z-10 w-full h-auto grayscale hover:grayscale-0 transition-all duration-700">
+                    </div>
+                    <div>
+                        <h1 class="text-5xl font-black uppercase tracking-tighter mb-6">About Buildup Interior</h1>
+                        <p class="text-lg text-zinc-600 leading-relaxed mb-6">
+                            Located in the heart of Nagercoil at Anna Bus Stand, Buildup Interior is a dedicated Interior Design Studio. We specialize in merging aesthetic beauty with structural integrity.
+                        </p>
+                        <p class="text-lg text-zinc-600 leading-relaxed mb-8">
+                            Whether it's a simple modular kitchen upgrade, geometric false ceilings, or a complete turnkey civil and interior project, our team of expert designers and craftsmen deliver excellence on every site.
+                        </p>
+                        <div class="grid grid-cols-2 gap-8 py-8 border-y border-zinc-200">
+                            <div>
+                                <div class="text-4xl font-black text-emerald-600 mb-2">100+</div>
+                                <div class="text-sm font-bold uppercase tracking-wider text-zinc-900">Projects Completed</div>
+                            </div>
+                            <div>
+                                <div class="text-4xl font-black text-emerald-600 mb-2">100%</div>
+                                <div class="text-sm font-bold uppercase tracking-wider text-zinc-900">Client Satisfaction</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- QUOTE PAGE -->
+        <div id="quote-page" class="page-section py-12 max-w-6xl mx-auto px-6 w-full">
+            
+            <div id="quote-form-container">
+                <div class="mb-12">
+                    <h1 class="text-5xl font-black uppercase tracking-tight mb-4">Get a Quote</h1>
+                    <p class="text-xl text-zinc-500">Upload photos of your space and tell us what you envision. We'll handle the rest.</p>
+                </div>
+
+                <div class="grid lg:grid-cols-5 gap-12">
+                    <!-- Form -->
+                    <form id="quote-form" class="lg:col-span-3 space-y-6">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div class="space-y-2">
+                                <label class="text-xs font-bold uppercase tracking-wider text-zinc-500">Full Name</label>
+                                <input required type="text" class="w-full bg-zinc-50 border border-zinc-200 rounded-none px-4 py-3 focus:outline-none focus:border-emerald-600 focus:bg-white transition-colors" placeholder="John Doe">
+                            </div>
+                            <div class="space-y-2">
+                                <label class="text-xs font-bold uppercase tracking-wider text-zinc-500">Phone Number</label>
+                                <input required type="tel" class="w-full bg-zinc-50 border border-zinc-200 rounded-none px-4 py-3 focus:outline-none focus:border-emerald-600 focus:bg-white transition-colors" placeholder="+91 98765 43210">
+                            </div>
+                        </div>
+                        <div class="space-y-2">
+                            <label class="text-xs font-bold uppercase tracking-wider text-zinc-500">Email Address</label>
+                            <input required type="email" class="w-full bg-zinc-50 border border-zinc-200 rounded-none px-4 py-3 focus:outline-none focus:border-emerald-600 focus:bg-white transition-colors" placeholder="john@example.com">
+                        </div>
+                        <div class="space-y-2">
+                            <label class="text-xs font-bold uppercase tracking-wider text-zinc-500">Project Type</label>
+                            <select class="w-full bg-zinc-50 border border-zinc-200 rounded-none px-4 py-3 focus:outline-none focus:border-emerald-600 focus:bg-white transition-colors appearance-none">
+                                <option>Modular Kitchen</option>
+                                <option>Wardrobe & Bedroom</option>
+                                <option>False Ceiling</option>
+                                <option>Full Interior + Civil (Turnkey)</option>
+                                <option>Commercial Space</option>
+                            </select>
+                        </div>
+                        <div class="space-y-2">
+                            <label class="text-xs font-bold uppercase tracking-wider text-zinc-500">Project Details & Vision</label>
+                            <textarea required rows="5" class="w-full bg-zinc-50 border border-zinc-200 rounded-none px-4 py-3 focus:outline-none focus:border-emerald-600 focus:bg-white transition-colors resize-none" placeholder="Describe your requirements, dimensions, or specific materials..."></textarea>
+                        </div>
+                        <button type="submit" id="submit-btn" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-black uppercase tracking-wider py-4 rounded-none transition-all flex justify-center items-center gap-2 disabled:bg-zinc-300">
+                            Submit to Nagercoil Office
+                        </button>
+                    </form>
+
+                    <!-- Drag & Drop -->
+                    <div class="lg:col-span-2 h-full flex flex-col">
+                        <div id="dropzone" class="flex-1 min-h-[300px] border-2 border-dashed border-zinc-300 hover:border-zinc-400 bg-zinc-50 transition-all flex flex-col items-center justify-center p-8 text-center relative cursor-pointer">
+                            <input type="file" id="file-input" multiple accept="image/*" class="hidden">
+                            <div class="w-16 h-16 bg-white rounded-full flex items-center justify-center mb-6 shadow-sm border border-zinc-100 pointer-events-none">
+                                <i data-feather="upload-cloud" class="w-8 h-8 text-zinc-400" id="drop-icon"></i>
+                            </div>
+                            <h3 class="text-xl font-bold mb-2 pointer-events-none">Upload Site Photos</h3>
+                            <p class="text-zinc-500 text-sm mb-6 pointer-events-none">Drag and drop images here, or click to browse.</p>
+                            <button type="button" class="px-6 py-2 bg-zinc-900 hover:bg-emerald-600 text-white text-xs font-bold uppercase tracking-wider transition-colors pointer-events-none">Browse Files</button>
+                        </div>
+
+                        <!-- Uploaded Files Preview -->
+                        <div id="files-list-container" class="mt-6 hidden">
+                            <h4 class="text-xs font-bold text-zinc-500 mb-3 uppercase tracking-wider">Attached Images (<span id="file-count">0</span>)</h4>
+                            <div id="files-list" class="space-y-2"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Success Message (Hidden initially) -->
+            <div id="quote-success" class="max-w-2xl mx-auto px-6 py-32 text-center hidden">
+                <div class="w-24 h-24 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center mx-auto mb-8">
+                    <i data-feather="check-circle" class="w-12 h-12"></i>
+                </div>
+                <h2 class="text-4xl font-black uppercase tracking-tight mb-4">Request Sent</h2>
+                <p class="text-lg text-zinc-500 mb-8">
+                    Your project details and photos have been sent to our design team in Nagercoil. We will contact you within 24 hours with your preliminary quotation.
+                </p>
+                <button onclick="resetQuoteForm()" class="text-emerald-600 font-bold uppercase tracking-wider text-sm flex items-center justify-center gap-2 mx-auto hover:text-emerald-700">
+                    Submit another project <i data-feather="chevron-right" class="w-4 h-4"></i>
+                </button>
+            </div>
+
+        </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-zinc-900 text-zinc-400 py-16 border-t-[8px] border-emerald-600 mt-auto">
+        <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-3 gap-12">
+            <div>
+                <div class="flex items-center gap-3 mb-6">
+                    <div class="w-10 h-10 bg-white rounded-lg flex flex-col items-center justify-center">
+                        <div class="w-0 h-0 border-l-[8px] border-r-[8px] border-b-[8px] border-transparent border-b-emerald-600 mb-1"></div>
+                        <span class="text-zinc-900 font-black text-[10px] tracking-widest">UP</span>
+                    </div>
+                    <span class="text-xl font-black text-white uppercase tracking-wider">Buildup Interior</span>
+                </div>
+                <p class="text-sm leading-relaxed mb-6">Nagercoil's premier interior design studio specializing in turnkey projects, modular kitchens, and bespoke civil work.</p>
+                <div class="flex gap-4">
+                    <a href="https://www.instagram.com/buildup_interior/" target="_blank" rel="noreferrer" class="w-10 h-10 rounded-full bg-zinc-800 flex items-center justify-center hover:bg-emerald-600 hover:text-white transition-colors">
+                        <i data-feather="instagram" class="w-5 h-5"></i>
+                    </a>
+                </div>
+            </div>
+            
+            <div>
+                <h4 class="text-white font-bold uppercase tracking-wider mb-6">Contact Us</h4>
+                <div class="space-y-4 text-sm">
+                    <div class="flex items-start gap-3">
+                        <i data-feather="map-pin" class="w-5 h-5 text-emerald-500 shrink-0"></i>
+                        <p>Purple Men's Wear Back,<br/>Anna Bus Stand,<br/>Nagercoil 629 001</p>
+                    </div>
+                    <div class="flex items-center gap-3">
+                        <i data-feather="phone" class="w-5 h-5 text-emerald-500 shrink-0"></i>
+                        <p>+91 98765 43210</p>
+                    </div>
+                    <div class="flex items-center gap-3">
+                        <i data-feather="mail" class="w-5 h-5 text-emerald-500 shrink-0"></i>
+                        <p>hello@buildupinterior.com</p>
+                    </div>
+                </div>
+            </div>
+
+            <div>
+                <h4 class="text-white font-bold uppercase tracking-wider mb-6">Quick Links</h4>
+                <ul class="space-y-2 text-sm flex flex-col items-start">
+                    <li><button onclick="navigate('home')" class="hover:text-emerald-500 transition-colors uppercase tracking-wider">Home</button></li>
+                    <li><button onclick="navigate('services')" class="hover:text-emerald-500 transition-colors uppercase tracking-wider">Services</button></li>
+                    <li><button onclick="navigate('portfolio')" class="hover:text-emerald-500 transition-colors uppercase tracking-wider">Portfolio</button></li>
+                    <li><button onclick="navigate('about')" class="hover:text-emerald-500 transition-colors uppercase tracking-wider">About</button></li>
+                </ul>
+            </div>
+        </div>
+        <div class="max-w-7xl mx-auto px-6 mt-12 pt-8 border-t border-zinc-800 text-xs text-center">
+            &copy; <span id="year"></span> Buildup Interior. All rights reserved. Nagercoil.
+        </div>
+    </footer>
+
+    <!-- CSS Tiny Workers Transition Overlay -->
+    <div id="transition-overlay" class="fixed inset-0 z-50 flex-col justify-center overflow-hidden bg-zinc-900 pointer-events-none transition-transform duration-500 ease-in-out hidden" style="transform: translateY(100%);">
+        <!-- Construction Tape / Banner -->
+        <div class="absolute top-1/2 -translate-y-1/2 w-full h-48 bg-emerald-600 flex flex-col justify-center items-center overflow-hidden">
+           <div class="absolute inset-0 opacity-20" style="background-image: repeating-linear-gradient(45deg, #000 0, #000 20px, transparent 20px, transparent 40px)"></div>
+           <h2 class="relative z-10 text-white font-black text-6xl md:text-8xl opacity-30 tracking-tighter uppercase mb-4">Constructing View</h2>
+        </div>
+        
+        <!-- The Tiny Workers -->
+        <div id="workers-container" class="absolute top-1/2 -translate-y-1/2 w-full h-32 flex items-center z-20">
+            <!-- Workers generated via JS -->
+        </div>
+    </div>
+
+    <!-- JavaScript Logic -->
+    <script>
+        // Initialize Feather Icons
+        feather.replace();
+        document.getElementById('year').textContent = new Date().getFullYear();
+
+        // --- Tiny Workers Construction Setup ---
+        const workersContainer = document.getElementById('workers-container');
+        const iconsList = ['👷‍♂️', '🚧', '🏗️', '🔨', '📏'];
+        for (let i = 0; i < 12; i++) {
+            const worker = document.createElement('div');
+            worker.className = 'worker transition-all duration-700 ease-in-out';
+            worker.textContent = iconsList[i % iconsList.length];
+            worker.style.top = `calc(50% + ${Math.random() * 80 - 40}px)`;
+            worker.style.transitionDelay = `${i * 0.05}s`;
+            workersContainer.appendChild(worker);
+        }
+
+        // --- Navigation & Transition Logic ---
+        let currentPage = 'home';
+        let isTransitioning = false;
+        const overlay = document.getElementById('transition-overlay');
+        const workers = document.querySelectorAll('.worker');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            if (mobileMenu.classList.contains('hidden')) {
+                mobileMenu.classList.remove('hidden');
+                mobileMenuBtn.innerHTML = '<i data-feather="x"></i>';
+            } else {
+                mobileMenu.classList.add('hidden');
+                mobileMenuBtn.innerHTML = '<i data-feather="menu"></i>';
+            }
+            feather.replace();
+        });
+
+        function updateNavColors(pageId) {
+            document.querySelectorAll('.nav-link').forEach(link => {
+                if (link.dataset.target === pageId) {
+                    link.classList.remove('text-zinc-500');
+                    link.classList.add('text-emerald-600');
+                } else {
+                    link.classList.add('text-zinc-500');
+                    link.classList.remove('text-emerald-600');
+                }
+            });
+        }
+
+        function navigate(pageId) {
+            if (isTransitioning || currentPage === pageId) {
+                mobileMenu.classList.add('hidden');
+                mobileMenuBtn.innerHTML = '<i data-feather="menu"></i>';
+                feather.replace();
+                return;
+            }
+            
+            isTransitioning = true;
+            mobileMenu.classList.add('hidden');
+            mobileMenuBtn.innerHTML = '<i data-feather="menu"></i>';
+            feather.replace();
+            updateNavColors(pageId);
+
+            // 1. Show overlay
+            overlay.style.display = 'flex';
+            setTimeout(() => { overlay.style.transform = 'translateY(0%)'; }, 50);
+
+            // 2. Scurry workers
+            setTimeout(() => {
+                workers.forEach(w => {
+                    w.style.opacity = '1';
+                    w.style.transform = 'translateX(120vw)';
+                });
+            }, 500);
+
+            // 3. Swap pages
+            setTimeout(() => {
+                document.querySelectorAll('.page-section').forEach(p => p.classList.remove('page-active'));
+                document.getElementById(`${pageId}-page`).classList.add('page-active');
+                window.scrollTo(0, 0);
+            }, 1100);
+
+            // 4. Slide overlay away
+            setTimeout(() => { overlay.style.transform = 'translateY(-100%)'; }, 1300);
+
+            // 5. Reset
+            setTimeout(() => {
+                overlay.style.display = 'none';
+                overlay.style.transform = 'translateY(100%)';
+                workers.forEach(w => {
+                    w.style.transition = 'none'; // remove transition for instant reset
+                    w.style.opacity = '0';
+                    w.style.transform = 'translateX(0)';
+                });
+                
+                // Restore transitions for next time
+                setTimeout(() => {
+                    workers.forEach((w, i) => {
+                        w.style.transition = 'all 0.8s ease-in-out';
+                        w.style.transitionDelay = `${i * 0.05}s`;
+                    });
+                }, 50);
+
+                isTransitioning = false;
+                currentPage = pageId;
+            }, 1800);
+        }
+
+        // --- Drag & Drop Form Logic ---
+        const dropzone = document.getElementById('dropzone');
+        const fileInput = document.getElementById('file-input');
+        const filesListContainer = document.getElementById('files-list-container');
+        const filesList = document.getElementById('files-list');
+        const fileCountSpan = document.getElementById('file-count');
+        const dropIcon = document.getElementById('drop-icon');
+        let uploadedFiles = [];
+
+        dropzone.addEventListener('click', () => fileInput.click());
+
+        dropzone.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            dropzone.classList.add('border-emerald-500', 'bg-emerald-50');
+            dropIcon.classList.remove('text-zinc-400');
+            dropIcon.classList.add('text-emerald-600');
+        });
+
+        dropzone.addEventListener('dragleave', (e) => {
+            e.preventDefault();
+            dropzone.classList.remove('border-emerald-500', 'bg-emerald-50');
+            dropIcon.classList.add('text-zinc-400');
+            dropIcon.classList.remove('text-emerald-600');
+        });
+
+        dropzone.addEventListener('drop', (e) => {
+            e.preventDefault();
+            dropzone.classList.remove('border-emerald-500', 'bg-emerald-50');
+            dropIcon.classList.add('text-zinc-400');
+            dropIcon.classList.remove('text-emerald-600');
+            handleFiles(e.dataTransfer.files);
+        });
+
+        fileInput.addEventListener('change', (e) => {
+            handleFiles(e.target.files);
+        });
+
+        function handleFiles(files) {
+            const newFiles = Array.from(files).slice(0, 5); // Limit 5
+            uploadedFiles = [...uploadedFiles, ...newFiles];
+            renderFiles();
+        }
+
+        function removeFile(index) {
+            uploadedFiles.splice(index, 1);
+            renderFiles();
+        }
+
+        function renderFiles() {
+            filesList.innerHTML = '';
+            if (uploadedFiles.length > 0) {
+                filesListContainer.classList.remove('hidden');
+                fileCountSpan.textContent = uploadedFiles.length;
+                
+                uploadedFiles.forEach((file, index) => {
+                    const fileDiv = document.createElement('div');
+                    fileDiv.className = 'flex items-center justify-between p-3 bg-white border border-zinc-200 shadow-sm';
+                    fileDiv.innerHTML = `
+                        <div class="flex items-center gap-3 overflow-hidden">
+                            <i data-feather="image" class="w-5 h-5 text-emerald-600 shrink-0"></i>
+                            <span class="text-sm font-medium text-zinc-700 truncate">${file.name}</span>
+                        </div>
+                        <button type="button" onclick="removeFile(${index})" class="p-1 text-zinc-400 hover:text-red-500 transition-colors">
+                            <i data-feather="x" class="w-4 h-4"></i>
+                        </button>
+                    `;
+                    filesList.appendChild(fileDiv);
+                });
+                feather.replace(); // re-init icons for dynamic elements
+            } else {
+                filesListContainer.classList.add('hidden');
+            }
+        }
+
+        // Form Submit Simulation
+        const quoteForm = document.getElementById('quote-form');
+        const quoteFormContainer = document.getElementById('quote-form-container');
+        const quoteSuccess = document.getElementById('quote-success');
+        const submitBtn = document.getElementById('submit-btn');
+
+        quoteForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            if (uploadedFiles.length === 0) {
+                // In vanilla JS, we can use standard alert just for this fail case, but user requested no alerts.
+                // Creating a small inline message:
+                let msg = document.getElementById('upload-error-msg');
+                if (!msg) {
+                    msg = document.createElement('p');
+                    msg.id = 'upload-error-msg';
+                    msg.className = 'text-center text-sm text-red-500 font-medium mt-4';
+                    msg.textContent = 'Please upload at least one image of your space.';
+                    quoteForm.appendChild(msg);
+                }
+                return;
+            }
+
+            // Simulate loading
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Sending Request...';
+
+            setTimeout(() => {
+                quoteFormContainer.classList.add('hidden');
+                quoteSuccess.classList.remove('hidden');
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = 'Submit to Nagercoil Office';
+            }, 2000);
+        });
+
+        // Reset form to submit another
+        window.resetQuoteForm = function() {
+            quoteForm.reset();
+            uploadedFiles = [];
+            renderFiles();
+            
+            const errorMsg = document.getElementById('upload-error-msg');
+            if (errorMsg) errorMsg.remove();
+
+            quoteSuccess.classList.add('hidden');
+            quoteFormContainer.classList.remove('hidden');
+        };
+    </script>
+</body>
+</html>
